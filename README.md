@@ -2,6 +2,7 @@
 
 <div align="center">
    A ToDo App made with React for Platzi's <a href="https://platzi.com/cursos/react-patrones-render/" target="_blank">"Patrones de Render y Composición"</a> course.
+   Solution: <a href="https://melodic-fudge-eb260a.netlify.app/" target="_blank">ToDo App</a>
 </div>
 
 <!-- TABLE OF CONTENTS -->
