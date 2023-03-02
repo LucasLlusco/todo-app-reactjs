@@ -1,0 +1,7 @@
+.EmptySearchTodos {
+    margin: 24px auto;
+    text-align: center;
+}
+.EmptySearchTodos span {
+    font-weight: 700;
+}

@@ -1,0 +1,13 @@
+.TodoCounter {
+  width: 95%;
+  margin: 48px auto;
+  font-size: 24px;
+  text-align: center;
+}
+.TodoCounter span {
+  color: #61DAFA;
+}
+
+.TodoCounter--loading {
+  opacity: 25%;
+}

@@ -1,0 +1,30 @@
+.ChangeAlert-bg {
+    background: rgba(32,35,41,.8);
+    position: fixed;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; 
+}
+.ChangeAlert-container {
+    width: 95%;
+    max-width: 350px;
+    background-color: #fff;
+    padding: 33px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+    align-items: center;
+    border-radius: 5px;
+    text-align: center;
+}
+.ChangeAlert-text {
+    font-weight: bold;
+    font-size: 20px;
+    color: #1E1E1F;
+}
