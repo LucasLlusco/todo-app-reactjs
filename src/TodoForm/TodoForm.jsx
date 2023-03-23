@@ -5,20 +5,20 @@ const TodoForm = ({ addTodo, setOpenModal, isInTodos }) => {
   const [newTodoValue, setNewTodoValue] = React.useState('');
   const [formError, setFormError] = React.useState(false);
   
+
   const onChange = (event) => {
     setNewTodoValue(event.target.value);
   };
   const onCancel = () => {
     setOpenModal(false);
   };
-  
   const onSubmit = (event) => {
     event.preventDefault();
     if(newTodoValue.trim().length !== 0) { 
       if(isInTodos(newTodoValue)) { 
         setFormError(true)
         return
-      } else {
+      } else { 
         addTodo(newTodoValue);
         setOpenModal(false); 
       }

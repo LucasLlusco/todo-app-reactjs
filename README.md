@@ -1,7 +1,8 @@
 <h1 align="center">ToDo app</h1>
 
 <div align="center">
-   A <a href="https://melodic-fudge-eb260a.netlify.app/" target="_blank">ToDo App</a> made with React for Platzi's <a href="https://platzi.com/cursos/react-patrones-render/" target="_blank">"Patrones de Render y Composición"</a> course.
+   A <a href="https://melodic-fudge-eb260a.netlify.app/" target="_blank">ToDo App</a> simple hecho con React para los cursos de Platzi<a href="https://platzi.com/cursos/react-patrones-render/" target="_blank"> "Patrones de Render y Composición"</a> y
+   <a href="https://platzi.com/cursos/react-estado/"> "Manejo profesional del estado"</a>.
 </div>
 
 <!-- TABLE OF CONTENTS -->
