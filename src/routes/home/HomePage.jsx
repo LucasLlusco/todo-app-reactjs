@@ -1,20 +1,20 @@
 import React from 'react';
-import useTodos from './useTodos';
-import TodoHeader from '../TodoHeader/TodoHeader';
-import TodoCounter from '../TodoCounter/TodoCounter';
-import TodoSearch from '../TodoSearch/TodoSearch';
-import TodoList from '../TodoList/TodoList';
-import TodoItem from '../TodoItem/TodoItem';
-import TodosError  from '../TodosError/TodosError';
-import TodosLoading  from '../TodosLoading/TodosLoading';
-import EmptyTodos  from '../EmptyTodos/EmptyTodos';
-import TodoForm from '../TodoForm/TodoForm';
-import CreateTodoButton  from '../CreateTodoButton/CreateTodoButton';
-import Modal from '../Modal/Modal';
-import { ChangeAlertWithStorageListener } from '../ChangeAlert/ChangeAlert';
-import EmptySearchTodos from '../EmptySearchTodos/EmptySearchTodos';
+import useTodos from '../useTodos';
+import TodoHeader from '../../ui/TodoHeader/TodoHeader';
+import TodoCounter from '../../ui/TodoCounter/TodoCounter';
+import TodoSearch from '../../ui/TodoSearch/TodoSearch';
+import TodoList from '../../ui/TodoList/TodoList';
+import TodoItem from '../../ui/TodoItem/TodoItem';
+import TodosError  from '../../ui/TodosError/TodosError';
+import TodosLoading  from '../../ui/TodosLoading/TodosLoading';
+import EmptyTodos  from '../../ui/EmptyTodos/EmptyTodos';
+import TodoForm from '../../ui/TodoForm/TodoForm';
+import CreateTodoButton  from '../../ui/CreateTodoButton/CreateTodoButton';
+import Modal from '../../ui/Modal/Modal';
+import { ChangeAlertWithStorageListener } from '../../ui/ChangeAlert/ChangeAlert';
+import EmptySearchTodos from '../../ui/EmptySearchTodos/EmptySearchTodos';
 
-function App() {
+const HomePage = () => {
   const {
     error,
     loading,
@@ -61,12 +61,12 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onEdit={() => console.log('Editar todo')}
             onComplete={() => completeTodo(todo.text)}
             onDelete={() => deleteTodo(todo.text)}
           />
         )}
       </TodoList>
-
       {!!openModal && (
         <Modal>
           <TodoForm
@@ -90,4 +90,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomePage

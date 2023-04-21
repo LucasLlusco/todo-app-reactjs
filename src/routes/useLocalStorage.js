@@ -64,7 +64,7 @@ const initialState = ({ initialValue })=>({
   item :initialValue,
 });
 
-const actionTypes = { 
+const actionTypes = {
   error: 'ERROR',
   success: 'SUCCESS',
   save: 'SAVE',
@@ -95,6 +95,7 @@ const reducerObject = (state, payload) =>({
 });
 
 const reducer = (state, action) => {
+
   return reducerObject(state, action.payload)[action.type] || state;
 }
 
