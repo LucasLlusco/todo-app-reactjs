@@ -14,7 +14,6 @@ function App() {
         <Route path='/edit/:id' element={<EditTodoPage/>} />
         <Route path='*' element={<>Not Found</>} />
       </Routes>
-      
     </HashRouter>
   );
 }
