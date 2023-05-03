@@ -8,27 +8,24 @@ import TodoItem from '../../ui/TodoItem/TodoItem';
 import TodosError  from '../../ui/TodosError/TodosError';
 import TodosLoading  from '../../ui/TodosLoading/TodosLoading';
 import EmptyTodos  from '../../ui/EmptyTodos/EmptyTodos';
-import TodoForm from '../../ui/TodoForm/TodoForm';
 import CreateTodoButton  from '../../ui/CreateTodoButton/CreateTodoButton';
-import Modal from '../../ui/Modal/Modal';
 import { ChangeAlertWithStorageListener } from '../../ui/ChangeAlert/ChangeAlert';
 import EmptySearchTodos from '../../ui/EmptySearchTodos/EmptySearchTodos';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const {
     error,
     loading,
     searchedTodos,
     completeTodo,
     deleteTodo,
-    isInTodos,
-    openModal,
-    setOpenModal,
     totalTodos,
     completedTodos,
     searchValue,
-    setSearchValue,
-    addTodo,
+    searchParams,
+    setSearchParams,
     synchronizeTodos,
   } = useTodos();
   
@@ -41,7 +38,8 @@ const HomePage = () => {
         />
         <TodoSearch
           searchValue={searchValue}
-          setSearchValue={setSearchValue}
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
         />
       </TodoHeader>
 
@@ -61,25 +59,14 @@ const HomePage = () => {
             key={todo.id}
             text={todo.text}
             completed={todo.completed}
-            onEdit={() => console.log('Editar todo')}
+            onEdit={() => navigate(`/edit/${todo.id}`, {state: {todo}})} 
             onComplete={() => completeTodo(todo.id)}
             onDelete={() => deleteTodo(todo.id)}
           />
         )}
       </TodoList>
-      {!!openModal && (
-        <Modal>
-          <TodoForm
-            addTodo={addTodo}
-            setOpenModal={setOpenModal}
-            isInTodos={isInTodos}
-
-          />
-        </Modal>
-      )}
-
       <CreateTodoButton
-        setOpenModal={setOpenModal}
+        onClick={() => navigate("/new")}
         loading={loading}
       />
       <ChangeAlertWithStorageListener 

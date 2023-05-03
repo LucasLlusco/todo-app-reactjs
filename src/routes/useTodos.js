@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocalStorage } from './useLocalStorage';
+import { useSearchParams } from 'react-router-dom';
 
 const useTodos = () => {
   const {
@@ -9,16 +10,17 @@ const useTodos = () => {
     loading,
     error,
   } = useLocalStorage('TODOS_V2', []);
-  const [searchValue, setSearchValue] = React.useState('');
-  const [openModal, setOpenModal] = React.useState(false);
+  
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchValue = searchParams.get("search") || ""; 
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
 
   let searchedTodos = [];
-
   if (!searchValue.length >= 1) {
-    searchedTodos = todos;
+    searchedTodos = todos; 
   } else {
     searchedTodos = todos.filter(todo => {
       const todoText = todo.text.toLowerCase();
@@ -26,6 +28,7 @@ const useTodos = () => {
       return todoText.includes(searchText);
     });
   }
+
 
   const addTodo = (text) => {
     const id = newTodoId(todos)
@@ -37,6 +40,11 @@ const useTodos = () => {
     });
     saveTodos(newTodos);
   };
+
+  const getTodo = (id) => {
+    const todoIndex = todos.findIndex(todo => todo.id === id);
+    return todos[todoIndex];
+  }
 
   const completeTodo = (id) => {
     const todoIndex = todos.findIndex(todo => todo.id === id);
@@ -52,6 +60,14 @@ const useTodos = () => {
     saveTodos(newTodos);
   };
 
+  const editTodo = (id, newText) => {
+    const todoIndex = todos.findIndex(todo => todo.id === id);
+    const newTodos = [...todos];
+    newTodos[todoIndex].text = newText;
+    saveTodos(newTodos);
+  };
+
+  
   const isInTodos = (text) => {
     if(todos.find(todo => todo.text === text)) {
       return true;
@@ -66,14 +82,15 @@ const useTodos = () => {
     totalTodos,
     completedTodos,
     searchValue,
-    setSearchValue,
+    searchParams,
+    setSearchParams,
     searchedTodos,
     addTodo,
+    getTodo,
     completeTodo,
+    editTodo,
     deleteTodo,
     isInTodos,
-    openModal,
-    setOpenModal,
     synchronizeTodos,
   };
 }

@@ -1,10 +1,16 @@
 import React from 'react';
 import './TodoSearch.css';
 
-const TodoSearch = ({ searchValue, setSearchValue, loading }) => {
-  
+const TodoSearch = ({ searchValue, searchParams, setSearchParams, loading }) => {
+
   const onSearchValueChange = (event) => {
-    setSearchValue(event.target.value);
+    let searchText = event.target.value;
+    if(searchText) {
+      setSearchParams({ search: searchText }); 
+    } else {
+      searchParams.delete("search"); 
+      setSearchParams(searchParams); 
+    }
   };
 
   return (

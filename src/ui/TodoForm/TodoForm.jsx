@@ -1,27 +1,24 @@
 import React from 'react';
 import './TodoForm.css';
+import { useNavigate } from 'react-router-dom';
 
-const TodoForm = ({ addTodo, setOpenModal, isInTodos }) => {
-  const [newTodoValue, setNewTodoValue] = React.useState('');
+const TodoForm = ({label, defaultTodoText, submitText, submitEvent, loading, isInTodos }) => {
+  const navigate = useNavigate();
   const [formError, setFormError] = React.useState(false);
+  const [newTodoValue, setNewTodoValue] = React.useState(defaultTodoText || "");
   
 
   const onChange = (event) => {
     setNewTodoValue(event.target.value);
   };
   const onCancel = () => {
-    setOpenModal(false);
+    navigate("/")
   };
   const onSubmit = (event) => {
     event.preventDefault();
     if(newTodoValue.trim().length !== 0) { 
-      if(isInTodos(newTodoValue)) { 
-        setFormError(true)
-        return
-      } else { 
-        addTodo(newTodoValue);
-        setOpenModal(false); 
-      }
+      submitEvent(newTodoValue);
+      navigate("/")
     } else {
       setFormError(true)
     }
@@ -30,7 +27,7 @@ const TodoForm = ({ addTodo, setOpenModal, isInTodos }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <label>Escribe tu nuevo TODO</label>
+      <label>{label}</label>
       <textarea
         value={newTodoValue}
         onChange={onChange}
@@ -48,8 +45,9 @@ const TodoForm = ({ addTodo, setOpenModal, isInTodos }) => {
         <button
           type="submit"
           className="TodoForm-button TodoForm-button--add"
+          disabled={loading}
         >
-          Añadir
+          {submitText}
         </button>
       </div>
     </form>
