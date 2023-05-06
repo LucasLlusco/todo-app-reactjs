@@ -11,15 +11,16 @@ const useTodos = () => {
     error,
   } = useLocalStorage('TODOS_V2', []);
   
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams(); 
 
   const searchValue = searchParams.get("search") || ""; 
+  console.log(searchValue)
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
 
   let searchedTodos = [];
-  if (!searchValue.length >= 1) {
+  if (!searchValue.length >= 1) { 
     searchedTodos = todos; 
   } else {
     searchedTodos = todos.filter(todo => {
@@ -43,7 +44,7 @@ const useTodos = () => {
 
   const getTodo = (id) => {
     const todoIndex = todos.findIndex(todo => todo.id === id);
-    return todos[todoIndex];
+    return todos[todoIndex]; 
   }
 
   const completeTodo = (id) => {

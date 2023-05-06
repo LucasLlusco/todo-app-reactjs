@@ -7,9 +7,9 @@ const TodoSearch = ({ searchValue, searchParams, setSearchParams, loading }) => 
     let searchText = event.target.value;
     if(searchText) {
       setSearchParams({ search: searchText }); 
-    } else {
+    } else { 
       searchParams.delete("search"); 
-      setSearchParams(searchParams); 
+      setSearchParams(searchParams);
     }
   };
 
