@@ -1,16 +1,21 @@
 import React from 'react';
 import './TodoSearch.css';
+import { useHistory } from 'react-router-dom';
 
-const TodoSearch = ({ searchValue, searchParams, setSearchParams, loading }) => {
-
+const TodoSearch = ({ searchParams, searchValue, setSearchValue, loading }) => {
+  const history = useHistory();
+  
   const onSearchValueChange = (event) => {
     let searchText = event.target.value;
+
     if(searchText) {
-      setSearchParams({ search: searchText }); 
+      searchParams.set("search", searchText);
+      history.push({search: searchParams.toString()})
     } else { 
-      searchParams.delete("search"); 
-      setSearchParams(searchParams);
+      searchParams.delete("search");
+      history.push({search: searchParams.toString()})
     }
+    setSearchValue(searchText);
   };
 
   return (

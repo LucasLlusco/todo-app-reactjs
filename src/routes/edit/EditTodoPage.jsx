@@ -5,14 +5,15 @@ import { useLocation, useParams } from 'react-router-dom'
 
 const EditTodoPage = () => {
   const params = useParams(); 
-  const id = Number(params.id) 
+  const id = Number(params.id)
+
   const location = useLocation();
   const { getTodo, editTodo, loading} = useTodos();
 
   let todoText;
 
-  if(location.state?.todo) {
-    todoText = location.state.todo.text; 
+  if(location.state?.todo) { 
+    todoText = location.state.todo.text;
   } else if (loading) { 
     return <p>cargando...</p>
   } else { 

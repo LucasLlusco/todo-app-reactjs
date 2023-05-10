@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const useTodos = () => {
   const {
@@ -10,11 +10,10 @@ const useTodos = () => {
     loading,
     error,
   } = useLocalStorage('TODOS_V2', []);
-  
-  const [searchParams, setSearchParams] = useSearchParams(); 
 
-  const searchValue = searchParams.get("search") || ""; 
-  console.log(searchValue)
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search); 
+  const [searchValue, setSearchValue] = useState(searchParams.get("search") || "");
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
@@ -82,9 +81,9 @@ const useTodos = () => {
     error,
     totalTodos,
     completedTodos,
-    searchValue,
     searchParams,
-    setSearchParams,
+    searchValue,
+    setSearchValue,
     searchedTodos,
     addTodo,
     getTodo,

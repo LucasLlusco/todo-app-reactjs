@@ -11,10 +11,11 @@ import EmptyTodos  from '../../ui/EmptyTodos/EmptyTodos';
 import CreateTodoButton  from '../../ui/CreateTodoButton/CreateTodoButton';
 import { ChangeAlertWithStorageListener } from '../../ui/ChangeAlert/ChangeAlert';
 import EmptySearchTodos from '../../ui/EmptySearchTodos/EmptySearchTodos';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const HomePage = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
+  
   const {
     error,
     loading,
@@ -23,9 +24,9 @@ const HomePage = () => {
     deleteTodo,
     totalTodos,
     completedTodos,
-    searchValue,
     searchParams,
-    setSearchParams,
+    searchValue,
+    setSearchValue,
     synchronizeTodos,
   } = useTodos();
   
@@ -37,9 +38,9 @@ const HomePage = () => {
           completedTodos={completedTodos}
         />
         <TodoSearch
-          searchValue={searchValue}
           searchParams={searchParams}
-          setSearchParams={setSearchParams}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
         />
       </TodoHeader>
 
@@ -59,14 +60,14 @@ const HomePage = () => {
             key={todo.id}
             text={todo.text}
             completed={todo.completed}
-            onEdit={() => navigate(`/edit/${todo.id}`, {state: {todo}})} 
+            onEdit={() => history.push(`/edit/${todo.id}`, {todo: todo} )} 
             onComplete={() => completeTodo(todo.id)}
             onDelete={() => deleteTodo(todo.id)}
           />
         )}
       </TodoList>
       <CreateTodoButton
-        onClick={() => navigate("/new")}
+        onClick={() => history.push("/new")}
         loading={loading}
       />
       <ChangeAlertWithStorageListener 

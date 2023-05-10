@@ -1,28 +1,27 @@
 import React from 'react';
 import './TodoForm.css';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const TodoForm = ({label, defaultTodoText, submitText, submitEvent, loading, isInTodos }) => {
-  const navigate = useNavigate();
-  const [formError, setFormError] = React.useState(false);
-  const [newTodoValue, setNewTodoValue] = React.useState(defaultTodoText || "");
+  const history = useHistory()
   
+  const [formError, setFormError] = React.useState(false);
+  const [newTodoValue, setNewTodoValue] = React.useState(defaultTodoText || "");  
 
   const onChange = (event) => {
     setNewTodoValue(event.target.value);
   };
   const onCancel = () => {
-    navigate("/")
+    history.push("/")
   };
   const onSubmit = (event) => {
     event.preventDefault();
     if(newTodoValue.trim().length !== 0) { 
       submitEvent(newTodoValue);
-      navigate("/")
+      history.push("/")
     } else {
       setFormError(true)
     }
-
   };
 
   return (
