@@ -1,9 +1,9 @@
 import React from 'react'
 import "./EmptySearchTodos.css"
 
-const EmptySearchTodos = (props) => {
+const EmptySearchTodos = ({searchText}) => {
   return (
-    <p className='EmptySearchTodos'>No hay resultados para <span>{props.searchText}</span> </p>
+    <p className='EmptySearchTodos'>No hay resultados para <span>{searchText}</span> </p>
   )
 }
 

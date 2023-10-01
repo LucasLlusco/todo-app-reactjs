@@ -1,5 +1,11 @@
-form {
+.TodoForm-container {
   width: 95%;
+  margin: 44px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form {
   max-width: 350px;
   background-color: #fff;
   padding: 33px 40px;

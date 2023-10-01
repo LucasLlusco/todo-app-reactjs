@@ -1,13 +1,12 @@
 import React from 'react';
 import './CreateTodoButton.css';
 
-const CreateTodoButton = ({onClick, loading}) =>  {
+const CreateTodoButton = ({onClick}) =>  {
 
   return (
     <button
       className="CreateTodoButton"
       onClick={onClick}
-      disabled={loading}
     >
       +
     </button>

@@ -1,37 +1,32 @@
 import React from 'react';
-import useTodos from '../useTodos';
+import useTodos from '../../hooks/useTodos';
 import TodoHeader from '../../ui/TodoHeader/TodoHeader';
 import TodoCounter from '../../ui/TodoCounter/TodoCounter';
 import TodoSearch from '../../ui/TodoSearch/TodoSearch';
 import TodoList from '../../ui/TodoList/TodoList';
 import TodoItem from '../../ui/TodoItem/TodoItem';
-import TodosError  from '../../ui/TodosError/TodosError';
-import TodosLoading  from '../../ui/TodosLoading/TodosLoading';
 import EmptyTodos  from '../../ui/EmptyTodos/EmptyTodos';
 import CreateTodoButton  from '../../ui/CreateTodoButton/CreateTodoButton';
-import { ChangeAlertWithStorageListener } from '../../ui/ChangeAlert/ChangeAlert';
 import EmptySearchTodos from '../../ui/EmptySearchTodos/EmptySearchTodos';
 import { useNavigate } from 'react-router-dom';
+import { ChangeAlertWithStorageListener } from '../../ui/ChangeAlert/ChangeAlert';
 
 const HomePage = () => {
   const navigate = useNavigate();
   const {
-    error,
-    loading,
     searchedTodos,
-    completeTodo,
-    deleteTodo,
+    handleCompleteTodo: completeTodo,
+    handleDeleteTodo: deleteTodo,
     totalTodos,
     completedTodos,
     searchValue,
     searchParams,
     setSearchParams,
-    synchronizeTodos,
   } = useTodos();
   
   return (
-    <React.Fragment>
-      <TodoHeader loading={loading}>
+    <>
+      <TodoHeader>
         <TodoCounter
           totalTodos={totalTodos}
           completedTodos={completedTodos}
@@ -44,13 +39,9 @@ const HomePage = () => {
       </TodoHeader>
 
       <TodoList
-        error={error}
-        loading={loading}
         totalTodos={totalTodos}
         searchedTodos={searchedTodos}
         searchText={searchValue}
-        onError={() => <TodosError />}
-        onLoading={() => <TodosLoading />}
         onEmptyTodos={() => <EmptyTodos />}
         onEmptySearchResults={() => <EmptySearchTodos searchText={searchValue} />}
       >
@@ -67,13 +58,12 @@ const HomePage = () => {
       </TodoList>
       <CreateTodoButton
         onClick={() => navigate("/new")}
-        loading={loading}
       />
-      <ChangeAlertWithStorageListener 
-        synchronize={synchronizeTodos} 
-      />
-      
-    </React.Fragment>
+      {/* <ChangeAlertWithStorageListener
+        synchronizedTodos={synchronizedTodos}
+        synchronizeTodos={synchronizeTodos}
+      /> */}
+    </>
   );
 }
 

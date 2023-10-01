@@ -1,10 +1,9 @@
 import React from 'react'
 import TodoForm from '../../ui/TodoForm/TodoForm'
-import useTodos from '../useTodos';
+import useTodos from '../../hooks/useTodos';
 
 const NewTodoPage = () => {
-
-  const { addTodo } = useTodos();
+  const { handleAddTodo:addTodo } = useTodos();
 
   return (
     <TodoForm 

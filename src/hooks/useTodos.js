@@ -1,15 +1,11 @@
 import React from 'react';
-import { useLocalStorage } from './useLocalStorage';
 import { useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodo, completeTodo, deleteTodo, editTodo } from '../redux/slices/todosSlice';
 
 const useTodos = () => {
-  const {
-    item: todos,
-    saveItem: saveTodos,
-    synchronizeItem: synchronizeTodos,
-    loading,
-    error,
-  } = useLocalStorage('TODOS_V2', []);
+  const todos =  useSelector(state => state.data.todos); 
+  const dispatch = useDispatch();
   
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -17,6 +13,7 @@ const useTodos = () => {
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
+
 
   let searchedTodos = [];
   if (!searchValue.length >= 1) {
@@ -30,15 +27,14 @@ const useTodos = () => {
   }
 
 
-  const addTodo = (text) => {
+  const handleAddTodo = (text) => {
     const id = newTodoId(todos)
-    const newTodos = [...todos];
-    newTodos.push({
+    const newTodo = {
       completed: false,
       text,
       id
-    });
-    saveTodos(newTodos);
+    }
+    dispatch(addTodo(newTodo));
   };
 
   const getTodo = (id) => {
@@ -46,25 +42,16 @@ const useTodos = () => {
     return todos[todoIndex];
   }
 
-  const completeTodo = (id) => {
-    const todoIndex = todos.findIndex(todo => todo.id === id);
-    const newTodos = [...todos];
-    newTodos[todoIndex].completed = true;
-    saveTodos(newTodos);
+  const handleCompleteTodo = (id) => {
+    dispatch(completeTodo(id))
   };
 
-  const deleteTodo = (id) => {
-    const todoIndex = todos.findIndex(todo => todo.id === id);
-    const newTodos = [...todos];
-    newTodos.splice(todoIndex, 1);
-    saveTodos(newTodos);
+  const handleDeleteTodo = (id) => {
+    dispatch(deleteTodo(id));
   };
 
-  const editTodo = (id, newText) => {
-    const todoIndex = todos.findIndex(todo => todo.id === id);
-    const newTodos = [...todos];
-    newTodos[todoIndex].text = newText;
-    saveTodos(newTodos);
+  const handleEditTodo = (id, newText) => {
+    dispatch(editTodo(id, newText))
   };
 
   
@@ -77,21 +64,18 @@ const useTodos = () => {
   }
   
   return {
-    loading,
-    error,
     totalTodos,
     completedTodos,
     searchValue,
     searchParams,
     setSearchParams,
     searchedTodos,
-    addTodo,
+    handleAddTodo, 
     getTodo,
-    completeTodo,
-    editTodo,
-    deleteTodo,
+    handleCompleteTodo, 
+    handleEditTodo, 
+    handleDeleteTodo,
     isInTodos,
-    synchronizeTodos,
   };
 }
 

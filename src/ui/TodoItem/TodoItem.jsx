@@ -4,23 +4,23 @@ import DeleteIcon  from '../TodoIcon/DeleteIcon';
 import './TodoItem.css';
 import EditIcon from '../TodoIcon/EditIcon';
 
-const TodoItem = (props) => {
+const TodoItem = ({completed, onComplete, text, onEdit, onDelete}) => {
   return (
     <li className="TodoItem">
       <CompleteIcon
-        completed={props.completed}
-        onComplete={props.onComplete}
+        completed={completed}
+        onComplete={onComplete}
       />
       <p
-        className={`TodoItem-p ${props.completed && 'TodoItem-p--complete'}`}
+        className={`TodoItem-p ${completed && 'TodoItem-p--complete'}`}
       >
-        {props.text}
+        {text}
       </p>
       <EditIcon 
-        onEdit={props.onEdit}
+        onEdit={onEdit}
       />
       <DeleteIcon
-        onDelete={props.onDelete}
+        onDelete={onDelete}
       />
     </li>
   );

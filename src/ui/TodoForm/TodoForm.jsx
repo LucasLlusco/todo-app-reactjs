@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './TodoForm.css';
 import { useNavigate } from 'react-router-dom';
 
-const TodoForm = ({label, defaultTodoText, submitText, submitEvent, loading, isInTodos }) => {
+const TodoForm = ({label, defaultTodoText, submitText, submitEvent, isInTodos }) => {
   const navigate = useNavigate();
-  const [formError, setFormError] = React.useState(false);
-  const [newTodoValue, setNewTodoValue] = React.useState(defaultTodoText || "");
+  const [formError, setFormError] = useState(false);
+  const [newTodoValue, setNewTodoValue] = useState(defaultTodoText || "");
   
 
   const onChange = (event) => {
@@ -26,31 +26,32 @@ const TodoForm = ({label, defaultTodoText, submitText, submitEvent, loading, isI
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <label>{label}</label>
-      <textarea
-        value={newTodoValue}
-        onChange={onChange}
-        placeholder="Comprar comida para el gato"
-      />
-      {formError && <p className='formError'>El campo está vacio o el TODO ya existe.</p>}
-      <div className="TodoForm-buttonContainer">
-        <button
-          type="button"
-          className="TodoForm-button TodoForm-button--cancel"
-          onClick={onCancel}
+    <section className='TodoForm-container'>
+      <form onSubmit={onSubmit}>
+        <label>{label}</label>
+        <textarea
+          value={newTodoValue}
+          onChange={onChange}
+          placeholder="Comprar comida para el gato"
+        />
+        {formError && <p className='formError'>El campo está vacio o el TODO ya existe.</p>}
+        <div className="TodoForm-buttonContainer">
+          <button
+            type="button"
+            className="TodoForm-button TodoForm-button--cancel"
+            onClick={onCancel}
+            >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            className="TodoForm-button TodoForm-button--add"
           >
-          Cancelar
-        </button>
-        <button
-          type="submit"
-          className="TodoForm-button TodoForm-button--add"
-          disabled={loading}
-        >
-          {submitText}
-        </button>
-      </div>
-    </form>
+            {submitText}
+          </button>
+        </div>
+      </form>
+    </section>
   );
 }
 

@@ -1,20 +1,21 @@
 import React from 'react'
 import TodoForm from '../../ui/TodoForm/TodoForm'
-import useTodos from '../useTodos'
 import { useLocation, useParams } from 'react-router-dom'
+import useTodos from '../../hooks/useTodos';
 
 const EditTodoPage = () => {
   const params = useParams(); 
   const id = Number(params.id) 
   const location = useLocation();
-  const { getTodo, editTodo, loading} = useTodos();
+  const { 
+    getTodo, 
+    handleEditTodo: editTodo, 
+  } = useTodos();
 
   let todoText;
 
   if(location.state?.todo) {
     todoText = location.state.todo.text; 
-  } else if (loading) { 
-    return <p>cargando...</p> 
   } else { 
     const todo = getTodo(id);
     todoText = todo.text;
@@ -26,8 +27,7 @@ const EditTodoPage = () => {
       label={"edita tu TODO"}
       defaultTodoText={todoText}
       submitText={"editar"}
-      submitEvent={(newText) => editTodo(id, newText)}
-      loading={loading}
+      submitEvent={(newText) => editTodo({id, newText})}
     />
   )
 }

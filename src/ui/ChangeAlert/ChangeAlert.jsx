@@ -4,7 +4,7 @@ import './ChangeAlert.css';
 
 
 function ChangeAlert({ show, toggleShow }) {
-  if (show) {
+  if (!show) {
     return (
       <div className="ChangeAlert-bg">
           <div className="ChangeAlert-container">
